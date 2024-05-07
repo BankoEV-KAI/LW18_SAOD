@@ -25,7 +25,7 @@ int getHash(std::string key) {
     for (int i = 0; i < key.size(); i++)
         hash += (int)key[i];
     hash %= size;
-    std::cout << "ќпределение хеша дл¤ ключа " << key << ":" << hash << std::endl;
+    std::cout << "Определение хеша для ключа " << key << ":" << hash << std::endl;
     return hash;
 }
 
@@ -34,11 +34,11 @@ void addIH(std::string newKey) {
     int hash = getHash(newKey);
     if (hashTableIH[hash].empty() || hashTableIH[hash] == newKey) {
         if (hashTableIH[hash] == newKey) {
-            std::cout << "Ёлмент "<< newKey << " на позиции " << hash << " уже существовал" << std::endl;
+            std::cout << "Элмент "<< newKey << " на позиции " << hash << " уже существовал" << std::endl;
             return;
         }
         hashTableIH[hash] = newKey;
-        std::cout << "Ёлемент с ключом " << newKey << " добавлен на позицию " << hash << " с одним сравнением" << std::endl;
+        std::cout << "Элемент с ключом " << newKey << " добавлен на позицию " << hash << " с одним сравнением" << std::endl;
         return;
     }
     else {
@@ -49,11 +49,11 @@ void addIH(std::string newKey) {
             std::cout << "newHash " << newKey << ":" << newHash << std::endl;
             if (hashTableIH[newHash].empty() || hashTableIH[newHash] == newKey) {
                 hashTableIH[newHash] = newKey;
-                std::cout << "Ёлемент с ключом " << newKey << " добавлен на позицию " << newHash << ", количество сравнений: " << ++comparisons << std::endl;
+                std::cout << "Элемент с ключом " << newKey << " добавлен на позицию " << newHash << ", количество сравнений: " << ++comparisons << std::endl;
                 return;
             }
         }
-        std::cout << "Ёлемент добавить невозможно: нет свободных мест дл¤ данного ключа" << std::endl;
+        std::cout << "Элемент добавить невозможно: нет свободных мест для данного ключа" << std::endl;
     }
 }
 
@@ -62,12 +62,12 @@ void searchIH(std::string key){
     comparisons = 0;
     int hash = getHash(key);
     if (hashTableIH[hash].empty()) {
-        std::cout << "»скомый элемент отсутствует " << std::endl;
+        std::cout << "Искомый элемент отсутствует " << std::endl;
         return;
     }
     else {
         if (hashTableIH[hash] == key) {
-            std::cout << " люч найден на позиции " << hash << ", за одно сравнение " << std::endl;
+            std::cout << "Ключ найден на позиции " << hash << ", за одно сравнение " << std::endl;
         }
         else {
             int newHash{ -1 };
@@ -75,17 +75,17 @@ void searchIH(std::string key){
                 comparisons++;
                 newHash = ((hash + i) & size) + 1;
                 if (hashTableIH[newHash] == key) {
-                    std::cout << " люч найден на позиции " << hash << ", количество сравнений: "<< comparisons << std::endl;
+                    std::cout << "Ключ найден на позиции " << hash << ", количество сравнений: "<< comparisons << std::endl;
                     return;
                 }
             }
-            std::cout << "Ёлемент не найден, количество произведенных сравнений: " << comparisons << std::endl;
+            std::cout << "Элемент не найден, количество произведенных сравнений: " << comparisons << std::endl;
         }
     }
 }
 
 void printTableIH() {
-    std::cout << "‘ормат записи значений hash:key, hash:пусто говороит, что не присвоено значение ключа" << std::endl;
+    std::cout << "Формат записи значений hash:key, hash:пусто говороит, что не присвоено значение ключа" << std::endl;
     for (int i = 0; i < size; i++) {
         std::cout << i << ":" << hashTableIH[i] << std::endl;
     }
